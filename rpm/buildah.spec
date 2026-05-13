@@ -97,6 +97,9 @@ Requires: bats
 Recommends: bats
 %endif
 Requires: bzip2
+Requires: xz
+Requires: zstd
+Requires: which
 Requires: podman
 Requires: golang
 Requires: jq
@@ -104,6 +107,7 @@ Requires: httpd-tools
 Requires: openssl
 Requires: nmap-ncat
 Requires: git-daemon
+Requires: libselinux-utils
 
 %description tests
 %{summary}
