@@ -54,7 +54,7 @@ filtered_changes=$(git diff --name-status $base $head   |
                        grep -E -v  '^contrib/'          |
                        grep -E -v  '^docs/'             |
                        grep -E -v  '^hack/'             |
-                       grep -E -v  '^nix/'              |
+                       grep -E -v  '^rpm/'              |
                        grep -E -v  '^vendor/')
 if [[ -z "$filtered_changes" ]]; then
     exit 0
