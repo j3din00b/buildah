@@ -2053,8 +2053,13 @@ func (s *stageExecutor) getCreatedBy(node *parser.Node, addedContentSummary stri
 			}
 			// Source specified is part of stage, image or additional-build-context.
 			if mountOptionFrom != "" {
-				// If this is not a stage then get digest of image or additional build context
-				if _, ok := s.executor.stages[mountOptionFrom]; !ok {
+				if stage, ok := s.executor.stages[mountOptionFrom]; ok {
+					// If source is a previous stage then checksum is image digest for that stage
+					if image, isPreviousStage := s.executor.imageMap[stage.name]; isPreviousStage {
+						mountCheckSum = image
+					}
+				} else {
+					// If this is not a stage then get digest of image or additional build context
 					if builder, ok := s.executor.containerMap[mountOptionFrom]; ok {
 						// Found valid image, get image digest.
 						mountCheckSum = builder.FromImageDigest
